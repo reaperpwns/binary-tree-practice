@@ -13,19 +13,42 @@ function findMinBST(rootNode) {
 }
 
 function findMaxBST(rootNode) {
-
+  let node = rootNode;
+  while (node.right) {
+    node = node.right;
+  }
+  return node.val;
 }
 
 function findMinBT(rootNode) {
-  // Your code here
+  let stash = [rootNode]
+  if (!rootNode) return
+  let lowest = Infinity
+  while (stash.length) {
+    let current = stash.shift()
+    if (current.val < lowest) lowest = current.val
+    if (current.left) stash.push(current.left)
+    if (current.right) stash.push(current.right)
+  }
+  return lowest
 }
 
 function findMaxBT(rootNode) {
+  let stash = [rootNode]
+  if (!rootNode) return
+  let lowest = -Infinity
+  while (stash.length) {
+    let current = stash.shift()
+    if (current.val > lowest) lowest = current.val
+    if (current.left) stash.push(current.left)
+    if (current.right) stash.push(current.right)
+  }
+  return lowest
   // Your code here
 }
 
 function getHeight(rootNode) {
-  // Your code here
+
 }
 
 function balancedTree(rootNode) {
