@@ -46,42 +46,41 @@ function findMaxBT(rootNode) {
   return lowest
 }
 
+// function getHeight(rootNode) {
+//   if (!rootNode) return -1;
+//   const stack = [rootNode];
+//   let height = 0;
+
+//   while (stack.length) {
+//     let curr = stack.pop();
+//     if (!curr.right && !curr.left) {
+//       return height;
+//     }
+//     height++;
+//     if (curr.left) {
+//       stack.push(curr.left);
+//     }
+//     if (curr.right) {
+//       stack.push(curr.right);
+//     }
+//   }
+// }
+
 function getHeight(rootNode) {
   if (!rootNode) return -1;
-  let stash = [rootNode];
   let height = 0;
-  while (stash.length) {
-    let current = stash.shift()
-    if (current.left) {
-      stash.push(current.left)
-      current = current.left;
-      height++;
-    }
-    if (current.right) {
-      stash.push(current.right)
-      current = current.right;
-      height++;
-    }
+  const queue = [];
+  queue.push(rootNode);
+  console.log(queue)
+  console.log('PP')
+  while (queue.length) {
+    let curr = queue[height]
+    // if (!curr.left && !curr.right) break;
+    if (curr.left) queue.push(curr.left);
+    if (curr.right) queue.push(curr.right);
   }
-  let leftHeight = height;
-  height = 0;
-
-  while (stash.length) {
-    let current = stash.shift()
-    if (current.right) {
-      stash.push(current.right)
-      current = current.right;
-      height++;
-    }
-    if (current.left) {
-      stash.push(current.left)
-      current = current.left;
-      height++;
-    }
-  }
-  let answer;
-  height > leftHeight ? answer = height : answer = leftHeight
-  return answer
+  console.log(queue)
+  return height;
 }
 
 function balancedTree(rootNode) {
