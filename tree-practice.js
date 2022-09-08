@@ -44,11 +44,44 @@ function findMaxBT(rootNode) {
     if (current.right) stash.push(current.right)
   }
   return lowest
-  // Your code here
 }
 
 function getHeight(rootNode) {
+  if (!rootNode) return -1;
+  let stash = [rootNode];
+  let height = 0;
+  while (stash.length) {
+    let current = stash.shift()
+    if (current.left) {
+      stash.push(current.left)
+      current = current.left;
+      height++;
+    }
+    if (current.right) {
+      stash.push(current.right)
+      current = current.right;
+      height++;
+    }
+  }
+  let leftHeight = height;
+  height = 0;
 
+  while (stash.length) {
+    let current = stash.shift()
+    if (current.right) {
+      stash.push(current.right)
+      current = current.right;
+      height++;
+    }
+    if (current.left) {
+      stash.push(current.left)
+      current = current.left;
+      height++;
+    }
+  }
+  let answer;
+  height > leftHeight ? answer = height : answer = leftHeight
+  return answer
 }
 
 function balancedTree(rootNode) {
